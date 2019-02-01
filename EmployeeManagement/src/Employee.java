@@ -2,89 +2,44 @@ import java.math.BigInteger;
 
 public class Employee {
     private String fullName;
-    private BigInteger phoneNumber;
+    private String phoneNumber;
     private String lastName;
-    private String EmployeeId;
+    private String employeeId;
     private String type;
-    Manager manager;
-    protected char department;
+    private String department;
 
-    public Employee(){}
-
-    public Employee(String fullName, BigInteger phoneNumber, String EmployeeId, String type, Manager manager){
+    public Employee(String fullName, String phoneNumber, String employeeId, String type) {
         this.fullName = fullName;
-        String[] array = (this.fullName).split(" ");
-        this.lastName = array[array.length - 1];
         this.phoneNumber = phoneNumber;
-        this.EmployeeId = EmployeeId;
+        this.employeeId = employeeId;
         this.type = type;
-        this.manager = manager;
-        System.out.println("Employee created");
-    }
-
-    public String getEmployeeId() {
-        return EmployeeId;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public BigInteger getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(BigInteger phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    protected char getDepartment() {
-        return department;
-    }
-
-    protected void setDepartment(char department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void getName(){
-        System.out.println("Full name: " + fullName);
-        System.out.println("Last name: " + lastName);
-    }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
-        manager.addToEmployeeList(this);
-    }
-
-    public void readDetails(){
-        System.out.println("Employee ID: " + getEmployeeId());
-        System.out.println("Name: " + getFullName());
-        System.out.println("Phone Number: " + getPhoneNumber().toString());
-        System.out.println("Type: " + getType());
-        System.out.println("Manager ID: " + getManager().getManagerId());
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", employeeId='" + employeeId + '\'' +
+                ", type='" + type + '\'' +
+                ", department='" + department + '\'' +
+                '}';
     }
 }

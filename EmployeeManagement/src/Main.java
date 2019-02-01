@@ -1,43 +1,31 @@
-import java.math.BigInteger;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    public static Manager createManager(){
-        Scanner sc = new Scanner(System.in);
-        Manager manager = new Manager(sc.nextLine());
-        return manager;
-    }
-
-    public static Employee createEmployee(Manager manager){
-        Scanner sc = new Scanner(System.in);
-        String fullName = sc.nextLine();
-        BigInteger phoneNumber = sc.nextBigInteger();
-        String EmployeeId = sc.nextLine();
-        String type = sc.nextLine();
-        Employee employee = new Employee(fullName, phoneNumber, EmployeeId, type, manager);
-        return employee;
-    }
-
-    public static void delete(Manager manager){
-        manager.delete();
-        manager = null;
-    }
-
-    public static void deleteAndReassign(Manager manager, Manager newManager) throws Throwable{
-        manager.reassign(newManager);
-        manager = null;
-    }
 
     public static void main(String[] args) throws Throwable {
-        Manager manager1 = createManager();
-        Manager manager2 = createManager();
-        Employee employee1 = createEmployee(manager1);
-        Employee employee2 = createEmployee(manager1);
-        employee1.getName();
-        manager1.setDepartment(employee1, 'A');
-        manager1.setDepartment(employee2, 'B');
-        delete(manager2);
-        Manager manager3 = createManager();
-        deleteAndReassign(manager1, manager3);
+        List<Employee> employeeList = new ArrayList<>();
+        List<Manager> managerList = new ArrayList<>();
+
+        ManagerFunctions managerFunctions = new ManagerFunctions();
+        EmployeeFunctions employeeFunctions = new EmployeeFunctions();
+
+        managerList.add(managerFunctions.createManager());
+        managerList.add(managerFunctions.createManager());
+        managerList.add(managerFunctions.createManager());
+
+        employeeList.add(employeeFunctions.createEmployee(managerList.get(0)));
+        employeeList.add(employeeFunctions.createEmployee(managerList.get(1)));
+
+        employeeFunctions.printName(employeeList);
+        System.out.println(employeeList);
+        System.out.println(managerList);
+
+        managerFunctions.assignEmployeeDepartment(managerList.get(0).getManagerId(), "A", managerList, employeeList);
+        managerFunctions.deleteManager(managerList.get(0).getManagerId(), managerList);
+        managerFunctions.deleteAndReassign(managerList.get(0).getManagerId(), managerList.get(1).getManagerId(), managerList);
+
+        System.out.println(managerList);
     }
+
 }

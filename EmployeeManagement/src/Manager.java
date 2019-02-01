@@ -1,48 +1,41 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Manager extends Employee{
-
+public class Manager {
     private String managerId;
-    private List<Employee> employeeList;
+    private String name;
+    private List<String> employeesUnderManager = new ArrayList<>();
 
-    public Manager(String managerId){
+    public Manager() {
+    }
+
+    public Manager(String managerId, String name) {
         this.managerId = managerId;
-        this.employeeList = new ArrayList<>();
-        System.out.println("Manager created");
+        this.name = name;
+    }
+
+    public void setEmployeesUnderManager(String empId) {
+        this.employeesUnderManager.add(empId);
     }
 
     public String getManagerId() {
         return managerId;
     }
 
-
-    public void setDepartment(Employee employee, char dept){
-        if(employee.manager == this){
-            employee.setDepartment(dept);
-        }
-        addToEmployeeList(employee);
+    public List<String> getEmployeesUnderManager() {
+        return employeesUnderManager;
     }
 
-    public char getDepartment(Employee employee){
-        return employee.getDepartment();
+    public void setEmployeesUnderManager(List<String> employeesUnderManager) {
+        this.employeesUnderManager.addAll(employeesUnderManager);
     }
 
-
-    public void addToEmployeeList(Employee employee){
-        this.employeeList.add(employee);
-    }
-
-
-    public void delete(){
-        for (Employee employee : this.employeeList){
-            employee = null;
-        }
-    }
-
-    public void reassign(Manager manager){
-        for (Employee employee : this.employeeList){
-            employee.setManager(manager);
-        }
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "managerId='" + managerId + '\'' +
+                ", name='" + name + '\'' +
+                ", employeesUnderManager=" + employeesUnderManager +
+                '}';
     }
 }
